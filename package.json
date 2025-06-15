@@ -1,0 +1,30 @@
+{
+  "name": "pricing-service",
+  "version": "1.0.0-alpha.0",
+  "description": "Calculate price of an order",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha Src/tests/unit/tsets.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamtapay-mnr/PricingService.git"
+  },
+  "keywords": [
+    "pricing",
+    "async"
+  ],
+  "author": "MNR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamtapay-mnr/PricingService/issues"
+  },
+  "homepage": "https://github.com/hamtapay-mnr/PricingService#readme",
+  "devDependencies": {
+    "eslint": "^9.29.0",
+    "mocha": "^11.6.0"
+  },
+  "dependencies": {
+    "redis": "^5.5.6"
+  }
+}
