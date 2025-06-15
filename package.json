@@ -3,8 +3,11 @@
   "version": "1.0.0-alpha.0",
   "description": "Calculate price of an order",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "mocha Src/tests/unit/tsets.js"
+    "lint": "eslint . --fix",
+    "test": "npx mocha Src/tests/unit/pricing.js",
+    "build": "npm run lint && npm run test && git add . && git commit -am 'scripts'"
   },
   "repository": {
     "type": "git",

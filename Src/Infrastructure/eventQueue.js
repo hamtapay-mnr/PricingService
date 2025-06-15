@@ -1,12 +1,12 @@
 const STREAM_KEY = 'new_order';
 const GROUP_NAME = 'order_group';
-
+const CONSUMER_NAME = 'pricing_service';
 export class EventQueue {
     constructor(eventSource) {
         this.eventSource = eventSource;
     }
     publish(message) {
-        return this.eventSource.publish("buy-orders", message);
+        return this.eventSource.publish("processed-order", message);
     }
     subscribe(callback) {
         this.eventSource.subscribe("buy-orders", (err, count) => {
@@ -43,20 +43,20 @@ export class EventQueue {
     }
 
     // Consume events from stream
-    async consumeEvent(consumerName, handlerFn) {
+    async consumeEvent(handlerFn) {
         while (true) {
             const messages = await this.eventSource.xReadGroup(
                 GROUP_NAME,
-                consumerName,
+                CONSUMER_NAME,
                 [{ key: STREAM_KEY, id: '>' }],
                 { COUNT: 10, BLOCK: 5000 }
             );
-
             if (messages) {
                 for (const msg of messages[0].messages) {
                     try {
                         await handlerFn(msg.message);
                         await this.eventSource.xAck(STREAM_KEY, GROUP_NAME, msg.id);
+                        console.log("acked***********", msg.id);
                     } catch (err) {
                         console.error('Error processing message', msg.id, err);
                     }
