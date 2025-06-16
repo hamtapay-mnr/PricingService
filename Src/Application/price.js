@@ -9,11 +9,11 @@
 export async function calculatePrice(amount, assetPercentage, cache) {
     let factor = 1;
     if (assetPercentage < 20)
-        factor = 1.1;
+        factor = 110;
     else if (assetPercentage < 50)
-        factor = 1.05;
+        factor = 105;
     const goldPrice = await cache.getPrice();
-    return goldPrice * factor;
+    return goldPrice * factor / 100;
 }
 /**
  * @memberOf PricingService.Src.Application.price
