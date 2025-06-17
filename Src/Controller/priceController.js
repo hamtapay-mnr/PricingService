@@ -13,12 +13,13 @@ export class PriceController {
      */
     async newOrder(orderString) {
         const orderObj = JSON.parse(orderString.data);
-        console.log("xcccccccccccc", orderObj);
-        // throw "e";
+        console.log("Recieved new order: ", orderObj);
+
         const percentage = await Price.getInventoryAssetPercentage(orderObj.currentInventory, orderObj.bought, this.cache);
         const price = await Price.calculatePrice(orderObj.bought, percentage.currentPercentage, this.cache);
-        const notifierObj = { price, remainingGoldPercentage: percentage.afterDeductionPercentage };
-        console.log("11111111111", notifierObj);
+        const notifierObj = { amount: orderObj.bought, username: orderObj.username, price, remainingGoldPercentage: percentage.afterDeductionPercentage };
+
+        console.log("Send order to notifier: ", notifierObj);
         Price.addToQueue(notifierObj, this.eventQueue);
     }
 }

@@ -7,7 +7,7 @@
  * @return {Promise<Object>} Promise
  */
 export async function calculatePrice(amount, assetPercentage, cache) {
-    let factor = 1;
+    let factor = 100;
     if (assetPercentage < 20)
         factor = 110;
     else if (assetPercentage < 50)
@@ -26,7 +26,7 @@ export async function calculatePrice(amount, assetPercentage, cache) {
  */
 export async function getInventoryAssetPercentage(amount, bought, cache) {
     const maxAsset = await cache.getMaxAsset();
-    console.log("xxxxxxxxxxx", amount, bought, maxAsset);
+    // console.log("Inventory: ", amount + "/" + maxAsset, " bought: ", bought);
     return {
         currentPercentage: (amount * 100) / maxAsset,
         afterDeductionPercentage: ((amount - bought) * 100) / maxAsset
