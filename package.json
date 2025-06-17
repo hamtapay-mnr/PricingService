@@ -1,10 +1,14 @@
 {
   "name": "pricing-service",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-rc.0",
   "description": "Calculate price of an order",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "mocha Src/tests/unit/tsets.js"
+    "lint": "eslint . --fix",
+    "test": "npx mocha Src/tests/unit/pricing.js",
+    "build": "npm run lint && npm run test && git add . && git commit -am 'scripts'",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
